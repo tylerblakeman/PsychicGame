@@ -39,22 +39,27 @@ document.onkeyup = function(event) {
         return resetGame();
         
     }
-    if (letters.includes(userGuess)) {
-        guessedLetters.push(userGuess);
-        console.log(guessedLetters);
-        guessesRemaining--;
-        guesses.innerHTML = guessesRemaining;
-        guessed.innerHTML = guessedLetters;
-        if (userGuess == letter) {
-            wins++;
-            winning.innerHTML = wins;
-            return resetGame();
-
-        }
+    if (guessedLetters.includes(userGuess)) {
+        console.log("already tried that one")
     }
     else {
-        console.log("not a letter");
-    }
+        if (letters.includes(userGuess)) {
+            guessedLetters.push(userGuess);
+            console.log(guessedLetters);
+            guessesRemaining--;
+            guesses.innerHTML = guessesRemaining;
+            guessed.innerHTML = guessedLetters;
+            if (userGuess == letter) {
+                wins++;
+                winning.innerHTML = wins;
+                return resetGame();
+
+            }
+        }
+        else {
+            console.log("not a letter");
+        }
+    }    
 }
 
 
@@ -84,6 +89,7 @@ function randLetter( ) {
 
   
     letter = letters[Math.floor(Math.random()*letters.length)];
+    console.log(letter);
      
     }
     

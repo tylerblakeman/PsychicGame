@@ -1,34 +1,64 @@
+//defining variables used throughout game
+
 var letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q"
 ,"r","s","t","u","v","w","x","y","z"];
+
 var guessesRemaining = 9;
 var wins = 0;
 var losses = 0;
-var guessedLetters = [""];
+var guessedLetters = [];
 var guesses = document.getElementById("guesses");
 var guessed = document.getElementById("guessed");
-var computersLetter = "";
-
-
-guesses.innerHTML += guessesRemaining;
-guessed.innerHTML += guessedLetters;
-randLetter();
-randLetter();
-randLetter();
-randLetter();
-randLetter();
-
-
-for (let i = 0; i > guessesRemaining; i++) {
-    ;
-    
-}
+var winning = document.getElementById("wins");
+var losing = document.getElementById("losses");
+var letter;
 
 //reset game
-if (guessesRemaining <= 0) {
+function resetGame() {
     guessesRemaining = 9;
-    randLetter;
     guessedLetters = [];
+    randLetter();
+    guessed.innerHTML = guessedLetters;
+    guesses.innerHTML = guessesRemaining;
 }
+
+
+//writing initial html with default game values
+guessed.innerHTML += guessedLetters;
+
+//selecting computer's letter
+randLetter();
+
+
+document.onkeyup = function(event) {
+    var userGuess = event.key.toLowerCase();
+// checking if guesses are at 0    
+    if (!guessesRemaining) {
+        losses++;
+        losing.innerHTML = losses;
+        return resetGame();
+        
+    }
+    if (letters.includes(userGuess)) {
+        guessedLetters.push(userGuess);
+        console.log(guessedLetters);
+        guessesRemaining--;
+        guesses.innerHTML = guessesRemaining;
+        guessed.innerHTML = guessedLetters;
+        if (userGuess == letter) {
+            wins++;
+            winning.innerHTML = wins;
+            return resetGame();
+
+        }
+    }
+    else {
+        console.log("not a letter");
+    }
+}
+
+
+
 
 
 
@@ -53,11 +83,7 @@ if (guessesRemaining <= 0) {
 function randLetter( ) {
 
   
-    var letter = letters[Math.floor(Math.random()*letters.length)];
-    
-    console.log(letter);
-    console.log(letters);
-    
-    
+    letter = letters[Math.floor(Math.random()*letters.length)];
+     
     }
     

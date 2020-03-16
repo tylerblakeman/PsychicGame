@@ -2,16 +2,20 @@
 
 var letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q"
 ,"r","s","t","u","v","w","x","y","z"];
+var letter;
 
+//gameplay variables
 var guessesRemaining = 9;
 var wins = 0;
 var losses = 0;
 var guessedLetters = [];
+
+//html element variables
 var guesses = document.getElementById("guesses");
 var guessed = document.getElementById("guessed");
 var winning = document.getElementById("wins");
 var losing = document.getElementById("losses");
-var letter;
+
 
 //reset game
 function resetGame() {
@@ -39,9 +43,15 @@ document.onkeyup = function(event) {
         return resetGame();
         
     }
+
+
+//check if letter has been guessed yet
+
     if (guessedLetters.includes(userGuess)) {
         console.log("already tried that one")
     }
+//registering guess and scoring
+
     else {
         if (letters.includes(userGuess)) {
             guessedLetters.push(userGuess);
@@ -49,6 +59,8 @@ document.onkeyup = function(event) {
             guessesRemaining--;
             guesses.innerHTML = guessesRemaining;
             guessed.innerHTML = guessedLetters;
+
+//WIN!
             if (userGuess == letter) {
                 wins++;
                 winning.innerHTML = wins;
@@ -61,26 +73,6 @@ document.onkeyup = function(event) {
         }
     }    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //random letter function
